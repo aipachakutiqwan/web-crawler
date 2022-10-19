@@ -3,5 +3,12 @@ Web pages monitoring
 
 Install packages:
 
-pip install --no-cache-dir --force-reinstall poetry==1.2.1 && \
-    poetry install
+pip install .
+
+run application
+
+python3 src/main_app.py --checking_period_seconds 1
+
+run server:
+
+python3 src/server.py
