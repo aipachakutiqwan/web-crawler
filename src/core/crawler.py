@@ -55,6 +55,7 @@ class Crawler():
 
     async def call_web_pages(self, list_webs: list):
         logging.info(f"Starting new checking period: {datetime.now()}")
+        start_time_call_web_pages = time.time()
         semaphore = asyncio.Semaphore(len(list_webs))
         sslcontext = ssl.create_default_context(cafile=certifi.where())
         client_timeout = aiohttp.ClientTimeout(total=self.timeout)
@@ -65,11 +66,16 @@ class Crawler():
                 #tasks.append(asyncio.create_task(session.get(url)))
                 start = time.time()
                 logging.debug(f"Start time url: {url}: {start}")
-                tasks.append(asyncio.create_task(self.bound_semaphore(semaphore, url, session, sslcontext, requirement_content)))
+                tasks.append(asyncio.create_task(self.bound_semaphore(semaphore, url,
+                                                                      session, sslcontext,
+                                                                      requirement_content)))
             list_logs = await asyncio.gather(*tasks)
             for log in list_logs:
                 logging.debug(f"log: {log}")
                 array_logs.append(log)
+        end_time_call_web_pages = time.time()
+        logging.info(f"Total time processed the whole request: "
+                     f"{end_time_call_web_pages - start_time_call_web_pages }")
         return array_logs
 
     def enter_scheduler(self):
