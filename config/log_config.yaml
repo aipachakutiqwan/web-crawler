@@ -1,0 +1,44 @@
+version: 1
+disable_existing_loggers: false
+
+formatters:
+  standard:
+    format: "[web-crawler] %(asctime)s %(name)s: %(levelname)-2s :: %(filename)s:%(module)s:%(funcName)s:%(lineno)d :: %(message)s"
+
+  request:
+    format: "[web-crawler] %(asctime)s %(name)s: %(levelname)-2s :: %(filename)s:%(module)s:%(funcName)s:%(lineno)d :: %(message)s"
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: standard
+    level: INFO
+    stream: ext://sys.stdout
+
+  file:
+    class: logging.handlers.TimedRotatingFileHandler
+    formatter: standard
+    when: midnight
+    backupCount: 7
+    filename: ./logs/web-crawler.log
+    level: INFO
+
+  file_req:
+    class: logging.handlers.WatchedFileHandler
+    formatter: request
+    filename: ./logs/web-crawler.log
+    level: INFO
+
+loggers:
+  request_logger:
+    level: INFO
+    handlers: [console, file_req]
+    propagate: false
+
+  uvicorn.error:
+      propagate: true
+
+root:
+  level: INFO
+  handlers: [console, file]
+  propagate: no
