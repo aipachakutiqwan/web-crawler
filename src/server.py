@@ -1,15 +1,14 @@
 from flask import Flask
 from flask import request
 import asyncio
+import argparse
 from src.core.crawler import Crawler
 from src.utils.utils import read_file
 
 app = Flask(__name__)
-print(f"start reading")
 path_web_files = './config/webs.txt'
 list_webs = read_file(path_web_files)
 checking_period_seconds = 1
-print(f"end reading")
 
 @app.route("/")
 async def index():
@@ -33,4 +32,7 @@ async def index():
     )
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5020, debug=True)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-c", "--port", help="set port", required=True)
+    args = parser.parse_args()
+    app.run(host="127.0.0.1", port=int(args.port), debug=True)
