@@ -1,5 +1,5 @@
 """
-Setup
+Setup application libraries
 """
 import setuptools
 
