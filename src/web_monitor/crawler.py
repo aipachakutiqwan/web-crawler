@@ -63,7 +63,6 @@ class Crawler():
         async with aiohttp.ClientSession(timeout=client_timeout) as session:
             tasks = []
             for url, requirement_content in list_webs:
-                #tasks.append(asyncio.create_task(session.get(url)))
                 start = time.time()
                 logging.debug(f"Start time url: {url}: {start}")
                 tasks.append(asyncio.create_task(self.bound_semaphore(semaphore, url,

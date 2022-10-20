@@ -27,8 +27,6 @@ class DistribuitedMonitoring():
             response:
         """
         self.app_config =  app_config
-        self.path_web_files = './config/webs.txt' #TODO: obtain from env
-        self.list_webs = read_file(self.path_web_files)
         self.checking_period_seconds = 1
         self.session = aiohttp.ClientSession()
         self.sslcontext = ssl.create_default_context(cafile=certifi.where())
@@ -37,17 +35,15 @@ class DistribuitedMonitoring():
         """
         Monitor a list of web pages in America
         Args:
-            :param monitoring_payload:
+            :param monitoring_payload: pydantic class with list of webpages to monitor
         Returns:
             response:
         """
-        CWL = Crawler({}, self.list_webs, self.checking_period_seconds)
+        list_webs = monitoring_payload.list_webs
+        CWL = Crawler({}, list_webs, self.checking_period_seconds)
         tasks = []
-        tasks.append(asyncio.create_task(CWL.call_web_pages(self.list_webs)))
+        tasks.append(asyncio.create_task(CWL.call_web_pages(list_webs)))
         list_logs = await asyncio.gather(*tasks)
-        logs = ""
-        for log_web in list_logs[0]:
-              logs = logs + str(log_web)
-        return [logs]
+        return list_logs[0]
 
 

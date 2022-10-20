@@ -8,7 +8,18 @@ In addition offer a simple web interface for application monitoring.
 
 ## Structure
 
-TBD
+- `config: contains the application configuration files`
+- `logs: file with the web monitoring information`
+- `resources: application resources`
+- `src: contains application code`
+  - `api: client webservices implementation following MVC approach`
+  - `log_manager: logging configuration files`
+  - `utils: utils scripts`
+  - `web_monitor: crawler web monitoring script`
+  - `api: start up script for the client API webservice `
+  - `main_app: start up crawler web monitoring`
+  - `server: start up web server for web interface monitoring`
+
 
 ## Installation
 
@@ -54,14 +65,65 @@ One centralized API orchestrator will call concurrently to the different API cli
 
 - How would you transfer the data ?
 
-The data will be transferred using API rest payload which contains the list of log for an specific period.
+The data will be transferred to the central location using API rest payloads which contains the list of log for an specific period.
 
 - What about security concerns ?
 
 The API rest architecture will need to use encryption at transit level (secure connection with basic authentication). 
-Additionally, a MTLS authentication to ensures that the API parties have the correct private key.
+Additionally, a MTLS authentication to ensures that the API parties have the proper private key.
 
 
 Here a high level architecture design:
 
 ![img.png](resources/crawler-architecture.png)
+
+As bonus, it was implemented a client webservices which will be deployed in any client region (In this example, in America).
+The Europe Orchestrator webservice will call this webservice to collect logs from America.
+
+For start up the client API web service, run uvicorn on port **8082** with the following script.
+
+```console
+python3 src/api.py 
+```
+
+Once the Fast API webservice is up, it is possible to call it using the following payload example.
+
+```json
+{
+    "list_webs":
+        [
+             ("https://httpbin.org","simple HTTP Request"),
+             ("https://example.org","This domain is for use in illustrative examples in documents."),
+             ("https://reddit.com","app_html_start"),
+             ("https://python.org","Python is a programming language that lets you work quickly")
+        ]
+}
+```
+The response payload will be something similar to the below json.
+
+```json
+{ 
+  "response":[
+      {"url":"https://httpbin.org","status":200,"response_time":3.528594970703125e-05,"content_verification":"CORRECT_CONTENT"},
+      {"url":"https://example.org","status":200,"response_time":2.8371810913085938e-05,"content_verification":"CORRECT_CONTENT"},
+      {"url":"https://reddit.com","status":200,"response_time":2.7555389404296875,"content_verification":"CORRECT_CONTENT"},
+      {"url":"https://python.org","status":200,"response_time":0.048532962799072266,"content_verification":"CORRECT_CONTENT"}
+    ]
+}
+```
+
+Try yourself using the following python script.
+
+```console
+python3 test/api/call_api_monitoring.py
+```
+
+If you prefer, it is possible to call with a curl command.
+
+```console
+curl -X POST http://localhost:8082/api/monitoring/america -H 'Content-Type: application/json' -d @./resources/list_webs.json
+```
+
+Secure connection with MTLS and Basic Authentication will be implemented.
+
+

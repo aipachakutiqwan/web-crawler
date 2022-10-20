@@ -10,4 +10,4 @@ class MonitoringPayload(BaseModel):
     Args:
         :param BaseModel: BaseModel
     """
-    datetime_monitoring: str
+    list_webs: list
