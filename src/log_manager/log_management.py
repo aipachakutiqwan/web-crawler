@@ -19,11 +19,9 @@ class CorrIdFilter(logging.Filter):
 def configure_logging(config, log_config):
     """
     Creates the request logger with formatters and handlers.
-
     Args:
         :param  config: configuration dictionary
         :param  log_config: log configuration file
-
     Returns:
         FastAPI configured
     """

@@ -1,17 +1,12 @@
 """
 DistribuitedMonitoring class for monitor web pages in America
 """
-import json
-import logging
 import aiohttp
 import ssl
 import certifi
 import asyncio
 from src.api.model.monitoring_payload import MonitoringPayload
-from src.api.model.monitoring_response import MonitoringResponse
-
 from src.web_monitor.crawler import Crawler
-from src.utils.utils import read_file
 
 
 class DistribuitedMonitoring():

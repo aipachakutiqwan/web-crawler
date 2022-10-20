@@ -1,3 +1,7 @@
+"""
+API log configuration
+"""
+
 import os
 from fastapi import FastAPI
 from src.log_manager.config import get_app_config_parameters
@@ -12,11 +16,9 @@ LOG_CONFIG_FILE = os.environ.get('LOG_CONFIG_FILE', 'config/log_config.yaml')
 def get_app(arg_app_config_file: str, arg_log_config_file: str) -> FastAPI:
     """
     Entrance function for the API where some configurations are done.
-
     Args:
         :param  arg_app_config_file: model architecture
         :param  arg_log_config_file: train loader data
-
     Returns:
         FastAPI configured
     """

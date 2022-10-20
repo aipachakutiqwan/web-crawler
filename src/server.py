@@ -1,3 +1,7 @@
+"""
+Script to start up front end web monitoring.
+"""
+
 from flask import Flask
 from flask import request
 import asyncio
@@ -12,6 +16,13 @@ checking_period_seconds = 1
 
 @app.route("/")
 async def index():
+    """
+    Show a form in front end to request web crawler monitoring
+    Args:
+        :param
+    Returns:
+        response: web log monitoring in front end.
+    """
     monitoring = request.args.get("monitoring", "")
     if monitoring:
         CWL = Crawler({}, list_webs, checking_period_seconds)

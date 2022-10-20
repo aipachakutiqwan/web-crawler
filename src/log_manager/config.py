@@ -7,10 +7,8 @@ import yaml
 def get_app_config_parameters(app_config_file):
     """
     Function to read yaml file.
-
     Args:
         :param  app_config_file: yaml file
-
     Returns:
         config_dict: config file
     """

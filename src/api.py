@@ -1,7 +1,6 @@
 """
 Script to start up the API client webservices in multiple
 geographically distributed locations.
-
 """
 import uvicorn
 

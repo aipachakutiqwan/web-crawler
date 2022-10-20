@@ -14,7 +14,7 @@ Here a description of the code content.
 - `logs: file with the web monitoring information`
 - `resources: application resources`
 - `src: contains application code`
-  - `api: client webservices implementation following MVC approach`
+  - `api: client webservices implementation following MVC architecture`
   - `log_manager: logging configuration files`
   - `utils: utils scripts`
   - `web_monitor: crawler web monitoring script`

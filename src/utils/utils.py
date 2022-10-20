@@ -1,5 +1,15 @@
+"""
+Application utils methods
+"""
 
 def read_file(path_file: str):
+    """
+    Read text file and store in list (urls and content requirement)
+    Args:
+        :param  document: document payload
+    Returns:
+        response: list web pages with their content requirement
+    """
     list_webs = []
     try:
         with open(path_file, 'r') as file:
