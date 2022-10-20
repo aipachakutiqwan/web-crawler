@@ -5,7 +5,7 @@ import os
 import argparse
 from src.log_manager.config import get_app_config_parameters
 from src.log_manager.log_management import configure_logging
-from src.core.crawler import Crawler
+from src.web_monitor.crawler import Crawler
 from src.utils.utils import read_file
 
 if __name__ == "__main__":

@@ -92,12 +92,3 @@ class Crawler():
                                      self.run_job,
                                      argument=([self.list_webs]))
         self.crawler_scheduler.run()
-
-#
-# if __name__ == "__main__":
-#     start_time = time.time()
-#     path_web_files = './config/webs.txt'
-#     list_webs = read_file(path_web_files)
-#     CWR = Crawler()
-#     CWR.schedule_job(list_webs, 1)
-#     print("--- It took %s seconds ---" % (time.time() - start_time))

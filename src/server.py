@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 import asyncio
 import argparse
-from src.core.crawler import Crawler
+from src.web_monitor.crawler import Crawler
 from src.utils.utils import read_file
 
 app = Flask(__name__)
