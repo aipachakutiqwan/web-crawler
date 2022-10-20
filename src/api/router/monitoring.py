@@ -18,10 +18,8 @@ async def get_monitoring_america_pages(monitoring_payload: MonitoringPayload,
     :param request: request containing handlers
     """
     distribuited_monitoring: DistribuitedMonitoring = request.app.state.distribuited_monitoring
-    result = "OK"
     try:
-        logs = distribuited_monitoring.monitor_webpages(monitoring_payload)
+        array_logs = await distribuited_monitoring.monitor_webpages(monitoring_payload)
     except Exception as ex:
         logging.error(f"MONITORING_ERROR: {ex} ")
-        result = "KO"
-    return MonitoringResponse(result=logs)
+    return MonitoringResponse(response=array_logs)

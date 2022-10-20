@@ -2,6 +2,7 @@
 MonitoringResponse pydantic class implementation
 """
 from pydantic import BaseModel
+from typing import List, Optional
 
 
 class MonitoringResponse(BaseModel):
@@ -10,4 +11,4 @@ class MonitoringResponse(BaseModel):
     Args:
         :param BaseModel: BaseModel
     """
-    result: list
+    response: List

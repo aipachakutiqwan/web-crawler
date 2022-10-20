@@ -3,8 +3,13 @@ DistribuitedMonitoring class for monitor web pages in America
 """
 import json
 import logging
+import aiohttp
+import ssl
+import certifi
 import asyncio
 from src.api.model.monitoring_payload import MonitoringPayload
+from src.api.model.monitoring_response import MonitoringResponse
+
 from src.web_monitor.crawler import Crawler
 from src.utils.utils import read_file
 
@@ -25,7 +30,8 @@ class DistribuitedMonitoring():
         self.path_web_files = './config/webs.txt' #TODO: obtain from env
         self.list_webs = read_file(self.path_web_files)
         self.checking_period_seconds = 1
-
+        self.session = aiohttp.ClientSession()
+        self.sslcontext = ssl.create_default_context(cafile=certifi.where())
 
     async def monitor_webpages(self, monitoring_payload: MonitoringPayload):
         """
@@ -34,14 +40,14 @@ class DistribuitedMonitoring():
             :param monitoring_payload:
         Returns:
             response:
-        # """
-
+        """
         CWL = Crawler({}, self.list_webs, self.checking_period_seconds)
         tasks = []
         tasks.append(asyncio.create_task(CWL.call_web_pages(self.list_webs)))
         list_logs = await asyncio.gather(*tasks)
-        logs = []
+        logs = ""
         for log_web in list_logs[0]:
-            logs.append(log_web)
-        logging.info(f"logs: {logs}")
-        return list_logs
+              logs = logs + str(log_web)
+        return [logs]
+
+
