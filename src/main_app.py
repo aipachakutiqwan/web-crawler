@@ -1,5 +1,7 @@
 """
-Main script and module entrypoint
+Main script for console web monitoring logs,
+output logs will be also writting in ./logs folder
+
 """
 import os
 import argparse
