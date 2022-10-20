@@ -1,10 +1,10 @@
 """
 DistribuitedMonitoring class for monitor web pages in America
 """
-import aiohttp
 import ssl
-import certifi
 import asyncio
+import aiohttp
+import certifi
 from src.api.model.monitoring_payload import MonitoringPayload
 from src.web_monitor.crawler import Crawler
 
@@ -35,10 +35,8 @@ class DistribuitedMonitoring():
             response:
         """
         list_webs = monitoring_payload.list_webs
-        CWL = Crawler({}, list_webs, self.checking_period_seconds)
+        crawler = Crawler({}, list_webs, self.checking_period_seconds)
         tasks = []
-        tasks.append(asyncio.create_task(CWL.call_web_pages(list_webs)))
+        tasks.append(asyncio.create_task(crawler.call_web_pages(list_webs)))
         list_logs = await asyncio.gather(*tasks)
         return list_logs[0]
-
-

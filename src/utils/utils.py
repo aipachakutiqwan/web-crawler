@@ -12,7 +12,7 @@ def read_file(path_file: str):
     """
     list_webs = []
     try:
-        with open(path_file, 'r') as file:
+        with open(path_file, 'r', encoding='UTF-8') as file:
             content = file.readlines()
             for line in content:
                 split_line =  line.strip().split(';')

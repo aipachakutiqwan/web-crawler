@@ -3,16 +3,15 @@ Concurrently asynchronous web pages monitoring.
 It is used to create the console (file output),
 front end and API client microservice web crawler monitoring.
 """
-
-import asyncio
-import sched
-import aiohttp
 import time
 import ssl
-import certifi
 import logging
-from src.utils.response_log import ResponseLog
+import asyncio
+import sched
 from datetime import datetime
+import aiohttp
+import certifi
+from src.utils.response_log import ResponseLog
 
 class Crawler():
     """
@@ -56,10 +55,12 @@ class Crawler():
                 response_time = end_time - start_time
                 if response.status==200:
                     content_verification = \
-                        "CORRECT_CONTENT" if requirement_content in response_text else "INCORRECT_CONTENT"
+                        "CORRECT_CONTENT" if requirement_content in response_text \
+                            else "INCORRECT_CONTENT"
                 else:
                     content_verification = ""
-                response_log = ResponseLog(url=url, status=response.status, response_time=response_time,
+                response_log = ResponseLog(url=url, status=response.status,
+                                           response_time=response_time,
                                   content_verification=content_verification)
                 logging.info(f"{response_log}")
 
@@ -73,9 +74,11 @@ class Crawler():
 
 
 
-    async def bound_semaphore(self, semaphore, url, session, sslcontext, requirement_content):
+    async def bound_semaphore(self, semaphore, url, session, sslcontext,
+                              requirement_content):
         """
-        Async semaphore bounded which manages an internal counter, it is decremented by each acquire call
+        Async semaphore bounded which manages an internal counter,
+        it is decremented by each acquire call
         and incremented by each release call; when acquire finds that it is zero,
         it blocks, waiting until some task calls release.
         Args:

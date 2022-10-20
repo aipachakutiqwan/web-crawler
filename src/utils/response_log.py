@@ -28,4 +28,3 @@ class ResponseLog(BaseModel):
                   str(self.content_verification)
 
         return str_log
-

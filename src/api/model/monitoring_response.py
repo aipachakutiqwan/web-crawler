@@ -1,9 +1,8 @@
 """
 MonitoringResponse pydantic class implementation
 """
+from typing import List
 from pydantic import BaseModel
-from typing import List, Optional
-
 
 class MonitoringResponse(BaseModel):
     """

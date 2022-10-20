@@ -1,18 +1,17 @@
 """
 Script to start up front end web monitoring.
 """
-
-from flask import Flask
-from flask import request
 import asyncio
 import argparse
+from flask import Flask
+from flask import request
 from src.web_monitor.crawler import Crawler
 from src.utils.utils import read_file
 
 app = Flask(__name__)
-path_web_files = './config/webs.txt'
-list_webs = read_file(path_web_files)
-checking_period_seconds = 1
+PATH_WEB_FILES = './config/webs.txt'
+list_webs = read_file(PATH_WEB_FILES)
+CHECKING_PERIOD_SECONDS = 1
 
 @app.route("/")
 async def index():
@@ -25,9 +24,9 @@ async def index():
     """
     monitoring = request.args.get("monitoring", "")
     if monitoring:
-        CWL = Crawler({}, list_webs, checking_period_seconds)
+        crawler = Crawler({}, list_webs, CHECKING_PERIOD_SECONDS)
         tasks = []
-        tasks.append(asyncio.create_task(CWL.call_web_pages(list_webs)))
+        tasks.append(asyncio.create_task(crawler.call_web_pages(list_webs)))
         list_logs = await asyncio.gather(*tasks)
         logs = ""
         for log_web in list_logs[0]:
