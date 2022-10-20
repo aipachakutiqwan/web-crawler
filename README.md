@@ -25,6 +25,8 @@ The console application will start up with the next command, set desired value f
 ```console
 python3 src/main_app.py --checking_period_seconds 1
 ```
+The application will produce the logs on the standard output and write some logging files in the folder ./logs
+
 
 The web server will start up with the next command, it is possible to set proper port. 
 
@@ -40,4 +42,26 @@ If you would like to run some unit tests.
 ```console
 pytest test
 ```
+## Scaling the application (Design topics)
 
+- Assuming we wanted to simultaneously monitor the connectivity (and latencies) from 
+multiple geographically distributed locations and collect all the data to a single 
+report that always reflects the current status across all locations, describe how 
+the design would be different. 
+
+Scaling the application to multiple geographically distributed locations will require API rest architecture solution. 
+One centralized API orchestrator will call concurrently to the different API clients (distributed geographically) which will response with the list of log collected.
+
+- How would you transfer the data ?
+
+The data will be transferred using API rest payload which contains the list of log for an specific period.
+
+- What about security concerns ?
+
+The API rest architecture will need to use encryption at transit level (secure connection with basic authentication). 
+Additionally, a MTLS authentication to ensures that the API parties have the correct private key.
+
+
+Here a high level architecture design:
+
+![img.png](resources/crawler-architecture.png)
