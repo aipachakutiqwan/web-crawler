@@ -33,6 +33,6 @@ async def index():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--port", help="set port", required=True)
+    parser.add_argument("-p", "--port", help="set port", required=True)
     args = parser.parse_args()
     app.run(host="127.0.0.1", port=int(args.port), debug=True)

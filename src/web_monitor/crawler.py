@@ -5,7 +5,7 @@ import time
 import ssl
 import certifi
 import logging
-from src.model.response_log import ResponseLog
+from src.utils.response_log import ResponseLog
 from datetime import datetime
 
 class Crawler():

@@ -10,7 +10,6 @@ ROUTER = APIRouter()
 def get_heartbeat() -> HeartbeatResponse:
     """
     Heartbeat API router implementation
-
     Returns:
         HeartbeatResult: pydantic heartbeat class
     """

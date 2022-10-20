@@ -15,6 +15,8 @@ setuptools.setup(
             "Flask==2.2.2",
             "Flask[async]",
             "certifi",
-            "pytest==7.1.0"
+            "pytest==7.1.0",
+            "fastapi==0.68.1",
+            "uvicorn==0.17.6",
     ]
 )
