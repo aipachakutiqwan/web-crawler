@@ -84,7 +84,7 @@ python3 src/api.py
 
 Once the Fast API webservice is up, it is possible to call it using the following payload example.
 
-```json
+```console
 {
     "list_webs":
         [
@@ -97,13 +97,13 @@ Once the Fast API webservice is up, it is possible to call it using the followin
 ```
 The response payload will be something similar to the below json.
 
-```json
+```console
 { 
   "response":[
-      {"url":"https://httpbin.org","status":200,"response_time":3.528594970703125e-05,"content_verification":"CORRECT_CONTENT"},
-      {"url":"https://example.org","status":200,"response_time":2.8371810913085938e-05,"content_verification":"CORRECT_CONTENT"},
-      {"url":"https://reddit.com","status":200,"response_time":2.7555389404296875,"content_verification":"CORRECT_CONTENT"},
-      {"url":"https://python.org","status":200,"response_time":0.048532962799072266,"content_verification":"CORRECT_CONTENT"}
+      {'url':'https://httpbin.org","status":200,"response_time":3.528594970703125e-05,"content_verification":"CORRECT_CONTENT'},
+      {'url':'https://example.org","status":200,"response_time":2.8371810913085938e-05,"content_verification":"CORRECT_CONTENT'},
+      {'url':'https://reddit.com","status":200,"response_time":2.7555389404296875,"content_verification":"CORRECT_CONTENT'},
+      {'url':'https://python.org","status":200,"response_time":0.048532962799072266,"content_verification":"CORRECT_CONTENT'}
     ]
 }
 ```
