@@ -84,7 +84,7 @@ python3 src/api.py
 
 Once the Fast API webservice is up, it is possible to call it using the following payload example.
 
-```json
+```console
 {
     "list_webs":
         [
@@ -97,7 +97,7 @@ Once the Fast API webservice is up, it is possible to call it using the followin
 ```
 The response payload will be something similar to the below json.
 
-```json
+```console
 { 
   "response":[
       {'url':'https://httpbin.org","status":200,"response_time":3.528594970703125e-05,"content_verification":"CORRECT_CONTENT'},
